@@ -33,7 +33,7 @@ def download_clicked():
         message='Download button clicked!'
     )
 
-download_icon = tk.PhotoImage(file=)
+download_icon = tk.PhotoImage(file='C:\\Users\\Olive\\Downloads\\Visual Studio Code\\Pythontutorial.net\\tkinter\\python-logo.png')
 download_button = ttk.Button(
     root,
     image=download_icon,
