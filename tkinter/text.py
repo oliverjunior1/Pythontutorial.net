@@ -23,3 +23,5 @@ text.pack()
 text.insert('1.0', 'This is a Text Widged demo')
 
 root.mainloop()
+
+
