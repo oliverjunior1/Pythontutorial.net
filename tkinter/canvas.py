@@ -138,3 +138,4 @@ canvas.tag_bind(
     lambda e: canvas.delete(image_item)
 )
 root.mainloop()
+
