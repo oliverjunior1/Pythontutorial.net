@@ -1,38 +1,85 @@
+# import tkinter as tk
+# from tkinter import ttk
+# from tkinter.messagebox import showinfo
+
+# root = tk.Tk()
+# root.title('Treeview demo')
+# root.geometry('620x200')
+
+# columns = ('first_name', 'last_name', 'email')
+
+# tree = ttk.Treeview(root, columns=columns, show='headings')
+
+# tree.heading('first_name', text='First Name')
+# tree.heading('last_name', text='Last Name')
+# tree.heading('email', text='Email')
+
+# contacts = []
+# for n in range(1,100):
+#     contacts.append((f'first {n}', f'last {n}', f'email{n}@example.com'))
+
+# for contact in contacts:
+#     tree.insert('', tk.END, values=contact)
+
+# def item_selected(event):
+#     for selected_item in tree.selection():
+#         item = tree.item(selected_item)
+#         record = item['values']
+#         showinfo(title='Information', message=','.join(record))
+
+# tree.bind('<<TreeviewSelect>>', item_selected)
+
+# tree.grid(row=0, column=0, sticky='nsew')
+
+# scrollbar = ttk.Scrollbar(root, orient=tk.VERTICAL, command=tree.yview)
+# tree.configure(yscroll=scrollbar.set)
+# scrollbar.grid(row=0, column=1, sticky='ns')
+
+# root.mainloop()
+#####################################
 import tkinter as tk
 from tkinter import ttk
 from tkinter.messagebox import showinfo
 
-root = tk.Tk()
-root.title('Treeview demo')
-root.geometry('620x200')
+class App(tk.Tk):
+    def __init__(self):
+        super().__init__()
 
-columns = ('first_name', 'last_name', 'email')
+        self.title('Treeview demo')
+        self.geometry('620x200')
 
-tree = ttk.Treeview(root, columns=columns, show='headings')
+        self.tree = self.create_tree_widget()
 
-tree.heading('first_name', text='First Name')
-tree.heading('last_name', text='Last Name')
-tree.heading('email', text='Email')
+        def create_tree_widget(self):
+            columns = ('first_name', 'last_name', 'email')
+            tree = ttk.Treeview(self, columns=columns, show='headings')
 
-contacts = []
-for n in range(1,100):
-    contacts.append((f'first {n}', f'last {n}', f'email{n}@example.com'))
+            tree.heading('first_name', 'last_name', 'email')
+            tree.heading('last_name', text='Last Name')
+            tree.heading('email',text= 'Email')
 
-for contact in contacts:
-    tree.insert('', tk.END, values=contact)
+            tree.bind('<<TreeviewSelect>>', self.item_selected)
+            tree.grid(row=0, column=0, sticky=tk.NSEW)
 
-def item_selected(event):
-    for selected_item in tree.selection():
-        item = tree.item(selected_item)
-        record = item['values']
-        showinfo(title='Information', message=','.join(record))
+            scrollbar = ttk.Scrollbar(self, orient=tk.VERTICAL, command=tree.yview)
+            tree.configure(yscroll=scrollbar.set)
+            scrollbar.grid(row=0, column=1, sticky='ns')
 
-tree.bind('<<TreeviewSelect>>', item_selected)
+            contacts = []
+            for n in range(1,100):
+                contacts.append((f'first {n}', f'last {n}', f'email{n}@example.com'))
 
-tree.grid(row=0, column=0, sticky='nsew')
+            for contact in contacts:
+                tree.insert('', tk.END, values=contact)
 
-scrollbar = ttk.Scrollbar(root, orient=tk.VERTICAL, command=tree.yview)
-tree.configure(yscroll=scrollbar.set)
-scrollbar.grid(row=0, column=1, sticky='ns')
+            return tree
+            
+        def item_selected(self, event):
+            for selected_item in self.tree.selection():
+                item = self.tree.item(selected_item)
+                record = item['values']
+                showinfo(title='Information', message=','.join(record))
 
-root.mainloop()
+if __name__ == '__main__':
+    app = App()
+    app.mainloop()
